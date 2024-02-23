@@ -27,6 +27,9 @@ export default function EventModal() {
   const [time, setTime] = useState(
     selectedEvent ? selectedEvent.time : ""
   );
+  const [ampm, setAmpm] = useState(
+    selectedEvent ? selectedEvent.ampm : ""
+  );
   const [selectedLabel, setSelectedLabel] = useState(
     selectedEvent
       ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
@@ -37,6 +40,7 @@ export default function EventModal() {
     const calendarEvent = {
       title,
       time,
+      ampm,
       description,
       label: selectedLabel,
       day: daySelected.valueOf(),
@@ -98,17 +102,28 @@ export default function EventModal() {
             <span className="material-icons-outlined text-gray-400">
               segment
             </span>
-            <input
-              type="text"
-              name="description"
-              placeholder="Add time meeting"
-              value={time}
-              required
-              className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
-              onChange={(e) => setTime(e.target.value)}
-            />
-
-
+            <div className="flex">
+              <div class="w-20 h-10 mr-3 relative">
+                <input
+                  type="text"
+                  name="time"
+                  value={time}
+                  required
+                  class="absolute w-full h-full border rounded-lg text-xs px-2"
+                  placeholder="10:15"
+                  onChange={(e) => setTime(e.target.value)}
+                />
+              </div>
+              <div class="w-20 h-10  relative">
+                <select
+                  value={ampm}
+                  onChange={(e) => setAmpm(e.target.value)}
+                  className="w-20 h-10 appearance-none border rounded-lg text-xs px-2 py-1">
+                  <option value="AM">AM</option>
+                  <option value="PM">PM</option>
+                </select>
+              </div>
+            </div>
             <span className="material-icons-outlined text-gray-400">
               segment
             </span>

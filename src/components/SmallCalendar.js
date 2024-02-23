@@ -34,7 +34,7 @@ export default function SmallCalendar() {
     };
   });
   console.log(formattedEvents);
-  
+
   function handlePrevMonth() {
     setCurrentMonthIdx(currentMonthIdx - 1);
   }
@@ -107,38 +107,41 @@ export default function SmallCalendar() {
           <span className="text-blue-500 font-bold mb-3">Upcoming Events</span>
           <span className="text-gray-500 font-bold text-xs mb-3">Today, {nowDay1}</span>
         </div>
-        <div style={{height:"17rem", overflow: "auto"}}>
-        {formattedEvents.map((event, index) => {
-          const format = "DD-MM-YY";
-          const nowDay = dayjs().format(format);
-          const eventDay = event.day;
-          if (nowDay === eventDay) {
-            return (
-              <div className="flex flex-col px-3 py-3 border-l-4 border-blue-900 rounded-md mb-3" key={index} style={{ backgroundColor: '#FFE4C8' }}>
-                <div class="grid grid-cols-12">
-                  <div class="col-span-9">
-                    <div class="flex flex-col">
-                      <span class="font-bold mb-2  text-blue-900">{event.title}</span>
-                      <span class="text-sm mb-2 text-gray-500">{event.time}</span>
-                      <div>
-                        <Avatar src={avatarImage} size={32} />
-                        <a class="ml-3 text-sm text-blue-300" target="blank" href={event.description}>
-                          <u>Go to link</u>
-                        </a>
+        <div style={{ height: "17rem", overflow: "auto" }}>
+          {formattedEvents.map((event, index) => {
+            const format = "DD-MM-YY";
+            const nowDay = dayjs().format(format);
+            const eventDay = event.day;
+            if (nowDay === eventDay) {
+              return (
+                <div className="flex flex-col px-3 py-3 border-l-4 border-blue-900 rounded-md mb-3" key={index} style={{ backgroundColor: '#FFE4C8' }}>
+                  <div class="grid grid-cols-12">
+                    <div class="col-span-9">
+                      <div class="flex flex-col">
+                        <span class="font-bold mb-2  text-blue-900">{event.title}</span>
+                        <div className="flex">
+                          <span class="text-sm mb-2 mr-1 text-gray-500">{event.time}</span>
+                          <span class="text-sm mb-2 text-gray-500">{event.ampm}</span>
+                        </div>
+                        <div>
+                          <Avatar src={avatarImage} size={32} />
+                          <a class="ml-3 text-sm text-blue-300" target="blank" href={event.description}>
+                            <u>Go to link</u>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-span-3">
+                      <div class="flex flex-col">
+                        <FontAwesomeIcon icon={faVideo} />
                       </div>
                     </div>
                   </div>
-                  <div class="col-span-3">
-                    <div class="flex flex-col">
-                      <FontAwesomeIcon icon={faVideo} />
-                    </div>
-                  </div>
                 </div>
-              </div>
-            );
-          }
-          return null;
-        })}
+              );
+            }
+            return null;
+          })}
         </div>
       </div>
     </div>
